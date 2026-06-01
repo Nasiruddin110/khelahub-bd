@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA বিশ্বকাপ ২০২৬ — ওমান সময়সূচি</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #f1f5f9;
+    padding-bottom: 40px;
+  }
+  /* HEADER */
+  .header {
+    background: linear-gradient(90deg, #1d4ed8, #7c3aed);
+    padding: 24px 16px 16px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-icon { font-size: 32px; margin-bottom: 4px; }
+  .header h1 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .header p { font-size: 12px; color: #bfdbfe; margin-bottom: 12px; }
+  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 7px 14px; border-radius: 20px; border: none;
+    font-weight: 700; font-size: 12px; cursor: pointer;
+    background: rgba(255,255,255,0.15); color: #fff;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .tab-btn.active { background: #fff; color: #1d4ed8; }
+  .search-input {
+    padding: 8px 16px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1); color: #fff;
+    font-size: 13px; width: 90%; max-width: 320px;
+    outline: none; font-family: inherit;
+  }
+  .search-input::placeholder { color: rgba(255,255,255,0.5); }
+
+  /* CONTENT */
+  .content { padding: 16px 12px; max-width: 700px; margin: 0 auto; }
+
+  /* DAY HEADER */
+  .day-header {
+    background: rgba(99,102,241,0.2);
+    border-left: 4px solid #6366f1;
+    padding: 8px 14px;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 10px;
+    font-size: 13px; font-weight: 700; color: #a5b4fc;
+  }
+  .day-block { margin-bottom: 20px; }
+  .matches { display: flex; flex-direction: column; gap: 8px; }
+
+  /* MATCH CARD */
+  .match-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .match-time {
+    color: #fff; font-weight: 800; font-size: 11px;
+    padding: 4px 10px; border-radius: 20px;
+    white-space: nowrap; min-width: 90px;
+    text-align: center;
+  }
+  .match-teams { flex: 1; min-width: 140px; }
+  .match-teams .teams { font-weight: 700; font-size: 13px; color: #f1f5f9; }
+  .match-teams .venue { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .group-badge {
+    font-size: 11px; font-weight: 700;
+    background: rgba(255,255,255,0.08);
+    padding: 3px 8px; border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* GROUPS VIEW */
+  .groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .group-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 14px;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .group-title { font-weight: 800; font-size: 15px; margin-bottom: 8px; }
+  .group-team { font-size: 12px; padding: 3px 0; color: #e2e8f0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .groups-note { text-align: center; color: #94a3b8; margin-bottom: 14px; font-size: 12px; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center; margin-top: 30px; padding: 16px;
+    color: #475569; font-size: 11px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer div { margin-top: 4px; }
+
+  .no-result { text-align: center; color: #94a3b8; margin-top: 40px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">⚽</div>
+  <h1>FIFA বিশ্বকাপ ২০২৬</h1>
+  <p>সম্পূর্ণ সময়সূচি — ওমান সময় অনুযায়ী (GMT+4)</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('group')">গ্রুপ পর্যায়</button>
+    <button class="tab-btn" onclick="switchTab('knockout')">নকআউট পর্যায়</button>
+    <button class="tab-btn" onclick="switchTab('groups')">গ্রুপ তালিকা</button>
+  </div>
+  <input class="search-input" id="searchInput" type="text" placeholder="দল বা ভেন্যু খুঁজুন..." oninput="renderMatches()" />
+</div>
+
+<div class="content" id="mainContent"></div>
+
+<script>
+const GROUP_COLORS = {
+  A:"#ef4444",B:"#f97316",C:"#eab308",D:"#22c55e",
+  E:"#06b6d4",F:"#3b82f6",G:"#8b5cf6",H:"#ec4899",
+  I:"#14b8a6",J:"#f59e0b",K:"#84cc16",L:"#64748b",
+  R32:"#6366f1",R16:"#0ea5e9",QF:"#d946ef",SF:"#f43f5e",
+  "3RD":"#78716c",FINAL:"#fbbf24"
+};
+
+const GROUPS = {
+  A:["মেক্সিকো","দক্ষিণ আফ্রিকা","দক্ষিণ কোরিয়া","চেকিয়া"],
+  B:["কানাডা","বসনিয়া","কাতার","সুইজারল্যান্ড"],
+  C:["ব্রাজিল","মরক্কো","হাইতি","স্কটল্যান্ড"],
+  D:["যুক্তরাষ্ট্র","প্যারাগুয়ে","অস্ট্রেলিয়া","তুরস্ক"],
+  E:["জার্মানি","কুরাকাও","আইভরি কোস্ট","ইকুয়েডর"],
+  F:["নেদারল্যান্ডস","জাপান","সুইডেন","তিউনিসিয়া"],
+  G:["বেলজিয়াম","মিশর","ইরান","নিউজিল্যান্ড"],
+  H:["স্পেন","কেপ ভার্দে","সৌদি আরব","উরুগুয়ে"],
+  I:["ফ্রান্স","সেনেগাল","ইরাক","নরওয়ে"],
+  J:["আর্জেন্টিনা","আলজেরিয়া","অস্ট্রিয়া","জর্দান"],
+  K:["পর্তুগাল","ডিআর কঙ্গো","উজবেকিস্তান","কলম্বিয়া"],
+  L:["ইংল্যান্ড","ক্রোয়েশিয়া","ঘানা","পানামা"]
+};
+
+function stageLabel(g){
+  const map={A:"গ্রুপ A",B:"গ্রুপ B",C:"গ্রুপ C",D:"গ্রুপ D",E:"গ্রুপ E",F:"গ্রুপ F",
+    G:"গ্রুপ G",H:"গ্রুপ H",I:"গ্রুপ I",J:"গ্রুপ J",K:"গ্রুপ K",L:"গ্রুপ L",
+    R32:"রাউন্ড অব ৩২",R16:"রাউন্ড অব ১৬",QF:"কোয়ার্টারফাইনাল",SF:"সেমিফাইনাল",
+    "3RD":"তৃতীয় স্থান",FINAL:"ফাইনাল"};
+  return map[g]||g;
+}
+
+const ALL_MATCHES = [
+  // GROUP STAGE
+  {date:"📅 ১১ জুন (বৃহস্পতিবার)",matches:[
+    {time:"রাত ১১টা",home:"মেক্সিকো",away:"দক্ষিণ আফ্রিকা",group:"A",venue:"মেক্সিকো সিটি"},
+    {time:"ভোর ৬টা (১২ জুন)",home:"দক্ষিণ কোরিয়া",away:"চেকিয়া",group:"A",venue:"গুয়াদালাহারা"},
+  ]},
+  {date:"📅 ১২ জুন (শুক্রবার)",matches:[
+    {time:"রাত ১১টা",home:"কানাডা",away:"বসনিয়া",group:"B",venue:"টরন্টো"},
+    {time:"ভোর ৫টা (১৩ জুন)",home:"যুক্তরাষ্ট্র",away:"প্যারাগুয়ে",group:"D",venue:"লস অ্যাঞ্জেলেস"},
+  ]},
+  {date:"📅 ১৩ জুন (শনিবার)",matches:[
+    {time:"রাত ১১টা",home:"কাতার",away:"সুইজারল্যান্ড",group:"B",venue:"সান ফ্রান্সিসকো"},
+    {time:"রাত ৩টা (১৪ জুন)",home:"ব্রাজিল",away:"মরক্কো",group:"C",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"ভোর ৫টা (১৪ জুন)",home:"হাইতি",away:"স্কটল্যান্ড",group:"C",venue:"বোস্টন"},
+    {time:"ভোর ৮টা (১৪ জুন)",home:"অস্ট্রেলিয়া",away:"তুরস্ক",group:"D",venue:"ভ্যাঙ্কুভার"},
+  ]},
+  {date:"📅 ১৪ জুন (রবিবার)",matches:[
+    {time:"রাত ১০টা",home:"জার্মানি",away:"কুরাকাও",group:"E",venue:"হিউস্টন"},
+    {time:"রাত ১টা (১৫ জুন)",home:"নেদারল্যান্ডস",away:"জাপান",group:"F",venue:"ডালাস"},
+    {time:"রাত ৪টা (১৫ জুন)",home:"আইভরি কোস্ট",away:"ইকুয়েডর",group:"E",venue:"ফিলাডেলফিয়া"},
+    {time:"ভোর ৮টা (১৫ জুন)",home:"সুইডেন",away:"তিউনিসিয়া",group:"F",venue:"মন্টেরে"},
+  ]},
+  {date:"📅 ১৫ জুন (সোমবার)",matches:[
+    {time:"রাত ৯টা",home:"স্পেন",away:"কেপ ভার্দে",group:"H",venue:"আটলান্টা"},
+    {time:"রাত ১১টা",home:"বেলজিয়াম",away:"মিশর",group:"G",venue:"ভ্যাঙ্কুভার"},
+    {time:"রাত ১১টা",home:"সৌদি আরব",away:"উরুগুয়ে",group:"H",venue:"মায়ামি"},
+    {time:"রাত ৩টা (১৬ জুন)",home:"ইরান",away:"নিউজিল্যান্ড",group:"G",venue:"লস অ্যাঞ্জেলেস"},
+  ]},
+  {date:"📅 ১৬ জুন (মঙ্গলবার)",matches:[
+    {time:"রাত ১২টা",home:"ফ্রান্স",away:"সেনেগাল",group:"I",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"রাত ৩টা",home:"ইরাক",away:"নরওয়ে",group:"I",venue:"বোস্টন"},
+    {time:"ভোর ৭টা (১৭ জুন)",home:"আর্জেন্টিনা",away:"আলজেরিয়া",group:"J",venue:"কানসাস সিটি"},
+    {time:"ভোর ১২টা (১৭ জুন)",home:"অস্ট্রিয়া",away:"জর্দান",group:"J",venue:"সান ফ্রান্সিসকো"},
+  ]},
+  {date:"📅 ১৭ জুন (বুধবার)",matches:[
+    {time:"রাত ১১টা",home:"পর্তুগাল",away:"ডিআর কঙ্গো",group:"K",venue:"হিউস্টন"},
+    {time:"রাত ২টা (১৮ জুন)",home:"ইংল্যান্ড",away:"ক্রোয়েশিয়া",group:"L",venue:"ডালাস"},
+    {time:"রাত ৪টা (১৮ জুন)",home:"ঘানা",away:"পানামা",group:"L",venue:"টরন্টো"},
+    {time:"ভোর ৮টা (১৮ জুন)",home:"উজবেকিস্তান",away:"কলম্বিয়া",group:"K",venue:"মেক্সিকো সিটি"},
+  ]},
+  {date:"📅 ১৮ জুন (বৃহস্পতিবার)",matches:[
+    {time:"রাত ৯টা",home:"চেকিয়া",away:"দক্ষিণ আফ্রিকা",group:"A",venue:"আটলান্টা"},
+    {time:"রাত ৩টা (১৯ জুন)",home:"সুইজারল্যান্ড",away:"বসনিয়া",group:"B",venue:"লস অ্যাঞ্জেলেস"},
+    {time:"ভোর ৬টা (১৯ জুন)",home:"কানাডা",away:"কাতার",group:"B",venue:"ভ্যাঙ্কুভার"},
+    {time:"ভোর ৭টা (১৯ জুন)",home:"মেক্সিকো",away:"দক্ষিণ কোরিয়া",group:"A",venue:"গুয়াদালাহারা"},
+  ]},
+  {date:"📅 ১৯ জুন (শুক্রবার)",matches:[
+    {time:"রাত ৩টা",home:"যুক্তরাষ্ট্র",away:"অস্ট্রেলিয়া",group:"D",venue:"সিয়াটেল"},
+    {time:"রাত ১১টা",home:"স্কটল্যান্ড",away:"মরক্কো",group:"C",venue:"বোস্টন"},
+    {time:"ভোর ৬টা (২০ জুন)",home:"ব্রাজিল",away:"হাইতি",group:"C",venue:"ফিলাডেলফিয়া"},
+    {time:"ভোর ৮টা (২০ জুন)",home:"তুরস্ক",away:"প্যারাগুয়ে",group:"D",venue:"সান ফ্রান্সিসকো"},
+  ]},
+  {date:"📅 ২০ জুন (শনিবার)",matches:[
+    {time:"রাত ১১টা",home:"নেদারল্যান্ডস",away:"সুইডেন",group:"F",venue:"হিউস্টন"},
+    {time:"রাত ১টা (২১ জুন)",home:"জার্মানি",away:"আইভরি কোস্ট",group:"E",venue:"টরন্টো"},
+    {time:"ভোর ৮টা (২১ জুন)",home:"ইকুয়েডর",away:"কুরাকাও",group:"E",venue:"কানসাস সিটি"},
+    {time:"ভোর ১০টা (২১ জুন)",home:"তিউনিসিয়া",away:"জাপান",group:"F",venue:"মন্টেরে"},
+  ]},
+  {date:"📅 ২১ জুন (রবিবার)",matches:[
+    {time:"রাত ৯টা",home:"স্পেন",away:"সৌদি আরব",group:"H",venue:"আটলান্টা"},
+    {time:"রাত ৩টা (২২ জুন)",home:"বেলজিয়াম",away:"ইরান",group:"G",venue:"লস অ্যাঞ্জেলেস"},
+    {time:"রাত ৩টা (২২ জুন)",home:"উরুগুয়ে",away:"কেপ ভার্দে",group:"H",venue:"মায়ামি"},
+    {time:"রাত ৩টা (২২ জুন)",home:"নিউজিল্যান্ড",away:"মিশর",group:"G",venue:"ভ্যাঙ্কুভার"},
+  ]},
+  {date:"📅 ২২ জুন (সোমবার)",matches:[
+    {time:"রাত ১১টা",home:"আর্জেন্টিনা",away:"অস্ট্রিয়া",group:"J",venue:"ডালাস"},
+    {time:"রাত ২টা (২৩ জুন)",home:"ফ্রান্স",away:"ইরাক",group:"I",venue:"ফিলাডেলফিয়া"},
+    {time:"রাত ৫টা (২৩ জুন)",home:"নরওয়ে",away:"সেনেগাল",group:"I",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"ভোর ১১টা (২৩ জুন)",home:"জর্দান",away:"আলজেরিয়া",group:"J",venue:"সান ফ্রান্সিসকো"},
+  ]},
+  {date:"📅 ২৩ জুন (মঙ্গলবার)",matches:[
+    {time:"রাত ১১টা",home:"পর্তুগাল",away:"উজবেকিস্তান",group:"K",venue:"হিউস্টন"},
+    {time:"রাত ১টা (২৪ জুন)",home:"ইংল্যান্ড",away:"ঘানা",group:"L",venue:"বোস্টন"},
+    {time:"রাত ৪টা (২৪ জুন)",home:"পানামা",away:"ক্রোয়েশিয়া",group:"L",venue:"টরন্টো"},
+    {time:"ভোর ৮টা (২৪ জুন)",home:"কলম্বিয়া",away:"ডিআর কঙ্গো",group:"K",venue:"গুয়াদালাহারা"},
+  ]},
+  {date:"📅 ২৪ জুন (বুধবার)",matches:[
+    {time:"রাত ৩টা (২৫ জুন)",home:"সুইজারল্যান্ড",away:"কানাডা",group:"B",venue:"ভ্যাঙ্কুভার"},
+    {time:"রাত ৩টা (২৫ জুন)",home:"বসনিয়া",away:"কাতার",group:"B",venue:"সিয়াটেল"},
+    {time:"রাত ৩টা (২৫ জুন)",home:"স্কটল্যান্ড",away:"ব্রাজিল",group:"C",venue:"মায়ামি"},
+    {time:"রাত ৩টা (২৫ জুন)",home:"মরক্কো",away:"হাইতি",group:"C",venue:"আটলান্টা"},
+    {time:"ভোর ৭টা (২৫ জুন)",home:"চেকিয়া",away:"মেক্সিকো",group:"A",venue:"মেক্সিকো সিটি"},
+    {time:"ভোর ৭টা (২৫ জুন)",home:"দক্ষিণ আফ্রিকা",away:"দক্ষিণ কোরিয়া",group:"A",venue:"মন্টেরে"},
+  ]},
+  {date:"📅 ২৫ জুন (বৃহস্পতিবার)",matches:[
+    {time:"রাত ১টা",home:"ইকুয়েডর",away:"জার্মানি",group:"E",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"রাত ১টা",home:"কুরাকাও",away:"আইভরি কোস্ট",group:"E",venue:"ফিলাডেলফিয়া"},
+    {time:"রাত ৫টা",home:"জাপান",away:"সুইডেন",group:"F",venue:"ডালাস"},
+    {time:"রাত ৫টা",home:"তিউনিসিয়া",away:"নেদারল্যান্ডস",group:"F",venue:"কানসাস সিটি"},
+    {time:"রাত ১০টা",home:"তুরস্ক",away:"যুক্তরাষ্ট্র",group:"D",venue:"লস অ্যাঞ্জেলেস"},
+    {time:"রাত ১০টা",home:"প্যারাগুয়ে",away:"অস্ট্রেলিয়া",group:"D",venue:"সান ফ্রান্সিসকো"},
+  ]},
+  {date:"📅 ২৬ জুন (শুক্রবার)",matches:[
+    {time:"রাত ১২টা",home:"নরওয়ে",away:"ফ্রান্স",group:"I",venue:"বোস্টন"},
+    {time:"রাত ১২টা",home:"সেনেগাল",away:"ইরাক",group:"I",venue:"টরন্টো"},
+    {time:"ভোর ৬টা (২৭ জুন)",home:"কেপ ভার্দে",away:"সৌদি আরব",group:"H",venue:"হিউস্টন"},
+    {time:"ভোর ৬টা (২৭ জুন)",home:"উরুগুয়ে",away:"স্পেন",group:"H",venue:"গুয়াদালাহারা"},
+    {time:"ভোর ১১টা (২৭ জুন)",home:"মিশর",away:"ইরান",group:"G",venue:"সিয়াটেল"},
+    {time:"ভোর ১১টা (২৭ জুন)",home:"নিউজিল্যান্ড",away:"বেলজিয়াম",group:"G",venue:"ভ্যাঙ্কুভার"},
+  ]},
+  {date:"📅 ২৭ জুন (শনিবার)",matches:[
+    {time:"রাত ২টা",home:"পানামা",away:"ইংল্যান্ড",group:"L",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"রাত ২টা",home:"ক্রোয়েশিয়া",away:"ঘানা",group:"L",venue:"ফিলাডেলফিয়া"},
+    {time:"রাত ৬:৩০",home:"কলম্বিয়া",away:"পর্তুগাল",group:"K",venue:"মায়ামি"},
+    {time:"রাত ৬:৩০",home:"ডিআর কঙ্গো",away:"উজবেকিস্তান",group:"K",venue:"আটলান্টা"},
+    {time:"ভোর ৮টা (২৮ জুন)",home:"আলজেরিয়া",away:"অস্ট্রিয়া",group:"J",venue:"কানসাস সিটি"},
+    {time:"ভোর ৮টা (২৮ জুন)",home:"জর্দান",away:"আর্জেন্টিনা",group:"J",venue:"ডালাস"},
+  ]},
+
+  // KNOCKOUT STAGE
+  {date:"📅 ২৮ জুন (রবিবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ৩টা (২৯ জুন)",home:"গ্রুপ A রানার্সআপ",away:"গ্রুপ B রানার্সআপ",group:"R32",venue:"লস অ্যাঞ্জেলেস"},
+  ]},
+  {date:"📅 ২৯ জুন (সোমবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ১১টা",home:"গ্রুপ C বিজয়ী",away:"গ্রুপ F রানার্সআপ",group:"R32",venue:"হিউস্টন"},
+    {time:"রাত ২:৩০ (৩০ জুন)",home:"গ্রুপ E বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"বোস্টন"},
+    {time:"ভোর ৭টা (৩০ জুন)",home:"গ্রুপ F বিজয়ী",away:"গ্রুপ C রানার্সআপ",group:"R32",venue:"মন্টেরে"},
+  ]},
+  {date:"📅 ৩০ জুন (মঙ্গলবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ১১টা",home:"গ্রুপ D রানার্সআপ",away:"গ্রুপ I রানার্সআপ",group:"R32",venue:"ডালাস"},
+    {time:"রাত ৩টা (১ জুলাই)",home:"গ্রুপ I বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"ভোর ৭টা (১ জুলাই)",home:"গ্রুপ A বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"মেক্সিকো সিটি"},
+  ]},
+  {date:"📅 ১ জুলাই (বুধবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ৯টা",home:"গ্রুপ L বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"আটলান্টা"},
+    {time:"রাত ৪টা (২ জুলাই)",home:"গ্রুপ G বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"সিয়াটেল"},
+    {time:"ভোর ৮টা (২ জুলাই)",home:"গ্রুপ D বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"সান ফ্রান্সিসকো"},
+  ]},
+  {date:"📅 ২ জুলাই (বৃহস্পতিবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ৩টা (৩ জুলাই)",home:"গ্রুপ H বিজয়ী",away:"গ্রুপ J রানার্সআপ",group:"R32",venue:"লস অ্যাঞ্জেলেস"},
+    {time:"রাত ৪টা (৩ জুলাই)",home:"গ্রুপ K রানার্সআপ",away:"গ্রুপ L রানার্সআপ",group:"R32",venue:"টরন্টো"},
+    {time:"ভোর ১১টা (৩ জুলাই)",home:"গ্রুপ B বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"ভ্যাঙ্কুভার"},
+  ]},
+  {date:"📅 ৩ জুলাই (শুক্রবার) — রাউন্ড অব ৩২",matches:[
+    {time:"রাত ১টা",home:"গ্রুপ D রানার্সআপ",away:"গ্রুপ G রানার্সআপ",group:"R32",venue:"ডালাস"},
+    {time:"রাত ৩টা (৪ জুলাই)",home:"গ্রুপ J বিজয়ী",away:"গ্রুপ H রানার্সআপ",group:"R32",venue:"মায়ামি"},
+    {time:"ভোর ৭:৩০ (৪ জুলাই)",home:"গ্রুপ K বিজয়ী",away:"তৃতীয় স্থান দল",group:"R32",venue:"কানসাস সিটি"},
+  ]},
+  {date:"📅 ৪ জুলাই (শনিবার) — রাউন্ড অব ১৬",matches:[
+    {time:"রাত ১১টা",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"হিউস্টন"},
+    {time:"রাত ৩টা (৫ জুলাই)",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"ফিলাডেলফিয়া"},
+  ]},
+  {date:"📅 ৫ জুলাই (রবিবার) — রাউন্ড অব ১৬",matches:[
+    {time:"রাত ১টা",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+    {time:"ভোর ৬টা (৬ জুলাই)",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"মেক্সিকো সিটি"},
+  ]},
+  {date:"📅 ৬ জুলাই (সোমবার) — রাউন্ড অব ১৬",matches:[
+    {time:"রাত ১টা",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"ডালাস"},
+    {time:"ভোর ৮টা (৭ জুলাই)",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"সিয়াটেল"},
+  ]},
+  {date:"📅 ৭ জুলাই (মঙ্গলবার) — রাউন্ড অব ১৬",matches:[
+    {time:"রাত ৯টা",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"আটলান্টা"},
+    {time:"ভোর ৪টা (৮ জুলাই)",home:"R32 বিজয়ী",away:"R32 বিজয়ী",group:"R16",venue:"ভ্যাঙ্কুভার"},
+  ]},
+  {date:"📅 ৯ জুলাই (বৃহস্পতিবার) — কোয়ার্টারফাইনাল",matches:[
+    {time:"রাত ১টা (১০ জুলাই)",home:"কোয়ার্টারফাইনাল ১",away:"",group:"QF",venue:"বোস্টন"},
+  ]},
+  {date:"📅 ১০ জুলাই (শুক্রবার) — কোয়ার্টারফাইনাল",matches:[
+    {time:"রাত ৩টা (১১ জুলাই)",home:"কোয়ার্টারফাইনাল ২",away:"",group:"QF",venue:"লস অ্যাঞ্জেলেস"},
+  ]},
+  {date:"📅 ১১ জুলাই (শনিবার) — কোয়ার্টারফাইনাল",matches:[
+    {time:"রাত ২টা",home:"কোয়ার্টারফাইনাল ৩",away:"",group:"QF",venue:"মায়ামি"},
+    {time:"ভোর ৭টা (১২ জুলাই)",home:"কোয়ার্টারফাইনাল ৪",away:"",group:"QF",venue:"কানসাস সিটি"},
+  ]},
+  {date:"📅 ১৪ জুলাই (মঙ্গলবার) — সেমিফাইনাল",matches:[
+    {time:"রাত ১টা (১৫ জুলাই)",home:"সেমিফাইনাল ১",away:"",group:"SF",venue:"ডালাস"},
+  ]},
+  {date:"📅 ১৫ জুলাই (বুধবার) — সেমিফাইনাল",matches:[
+    {time:"রাত ১২টা",home:"সেমিফাইনাল ২",away:"",group:"SF",venue:"আটলান্টা"},
+  ]},
+  {date:"📅 ১৮ জুলাই (শনিবার) — তৃতীয় স্থান",matches:[
+    {time:"রাত ২টা (১৯ জুলাই)",home:"তৃতীয় স্থান নির্ধারণী",away:"",group:"3RD",venue:"মায়ামি"},
+  ]},
+  {date:"📅 ১৯ জুলাই (রবিবার) — 🏆 ফাইনাল",matches:[
+    {time:"রাত ১২টা",home:"🏆 ফাইনাল",away:"",group:"FINAL",venue:"নিউ ইয়র্ক/নিউ জার্সি"},
+  ]},
+];
+
+const GROUP_KEYS = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+const KNOCKOUT_KEYS = ["R32","R16","QF","SF","3RD","FINAL"];
+
+let activeTab = "group";
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', ['group','knockout','groups'][i] === tab);
+  });
+  const si = document.getElementById('searchInput');
+  if(si) si.value = '';
+  renderMatches();
+}
+
+function renderMatches() {
+  const content = document.getElementById('mainContent');
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+
+  if (activeTab === 'groups') {
+    let html = '<p class="groups-note">মোট ১২টি গ্রুপে ৪৮টি দল</p><div class="groups-grid">';
+    for (const [g, teams] of Object.entries(GROUPS)) {
+      html += `<div class="group-card" style="border-left-color:${GROUP_COLORS[g]}">
+        <div class="group-title" style="color:${GROUP_COLORS[g]}">গ্রুপ ${g}</div>
+        ${teams.map(t=>`<div class="group-team">• ${t}</div>`).join('')}
+      </div>`;
+    }
+    html += '</div>';
+    content.innerHTML = html + footer();
+    return;
+  }
+
+  const filtered = ALL_MATCHES.filter(day => {
+    const isGroup = day.matches.some(m => GROUP_KEYS.includes(m.group));
+    const isKnockout = day.matches.some(m => KNOCKOUT_KEYS.includes(m.group));
+    if (activeTab === 'group' && !isGroup) return false;
+    if (activeTab === 'knockout' && !isKnockout) return false;
+    if (q) return day.matches.some(m =>
+      m.home.toLowerCase().includes(q) ||
+      (m.away||'').toLowerCase().includes(q) ||
+      m.venue.toLowerCase().includes(q) ||
+      day.date.toLowerCase().includes(q)
+    );
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    content.innerHTML = '<p class="no-result">কোনো ম্যাচ পাওয়া যায়নি।</p>';
+    return;
+  }
+
+  let html = '';
+  for (const day of filtered) {
+    html += `<div class="day-block">
+      <div class="day-header">${day.date}</div>
+      <div class="matches">`;
+    for (const m of day.matches) {
+      const col = GROUP_COLORS[m.group] || '#6366f1';
+      html += `<div class="match-card" style="border-left-color:${col}">
+        <div class="match-time" style="background:${col}">🕐 ${m.time}</div>
+        <div class="match-teams">
+          <div class="teams">${m.home}${m.away ? ' 🆚 ' + m.away : ''}</div>
+          <div class="venue">📍 ${m.venue}</div>
+        </div>
+        <div class="group-badge" style="color:${col}">${stageLabel(m.group)}</div>
+      </div>`;
+    }
+    html += '</div></div>';
+  }
+  content.innerHTML = html + footer();
+}
+
+function footer() {
+  return `<div class="footer">
+    <div>🇴🇲 সব সময় ওমান স্থানীয় সময় (GMT+4) অনুযায়ী</div>
+    <div>পরের দিনের উল্লেখ মানে মধ্যরাত পার হওয়ার পরে</div>
+    <div>সূত্র: FIFA / Al Jazeera (৩১ মে ২০২৬)</div>
+  </div>`;
+}
+
+// Init
+renderMatches();
+</script>
+</body>
+</html>
