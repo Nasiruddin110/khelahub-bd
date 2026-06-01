@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KhelaHub BD — খেলার আসল ঠিকানা</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hind+Siliguri:wght@300;400;500;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --primary: #1a6b2e;
+  --primary-light: #27a847;
+  --primary-dark: #0f4019;
+  --accent: #f5a623;
+  --accent2: #e8193c;
+  --bg: #f0f4f0;
+  --bg2: #e4ede6;
+  --white: #ffffff;
+  --card: #ffffff;
+  --text: #111a13;
+  --muted: #5a7060;
+  --border: rgba(26,107,46,0.15);
+  --shadow: 0 4px 24px rgba(26,107,46,0.12);
+  --shadow-lg: 0 12px 48px rgba(26,107,46,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ====== ANIMATED BACKGROUND ====== */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ====== NAVBAR ====== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 68px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--primary-light);
+  box-shadow: 0 2px 20px rgba(26,107,46,0.1);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(26,107,46,0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+}
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.logo-text span { color: var(--accent); }
+.logo-sub { font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; display: block; margin-top: -2px; }
+
+.nav-links {
+  display: flex;
+  gap: 0.3rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover { color: var(--primary); background: rgba(26,107,46,0.08); }
+
+.nav-follow {
+  background: var(--accent2) !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  padding: 0.45rem 1.2rem !important;
+  display: flex; align-items: center; gap: 0.35rem;
+}
+.nav-follow:hover { background: #c0112d !important; transform: scale(1.04); }
+
+.nav-notify {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}
+.nav-notify:hover { background: var(--primary-dark) !important; }
+
+/* ====== TICKER ====== */
+.ticker-wrap {
+  position: relative;
+  z-index: 10;
+  margin-top: 68px;
+  background: var(--primary);
+  padding: 0;
+  overflow: hidden;
+}
+
+.ticker-label {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  z-index: 2;
+  background: var(--accent);
+  color: #000;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 0.55rem 1.2rem;
+  display: flex; align-items: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.ticker-inner {
+  display: flex;
+  animation: ticker 45s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+  padding-left: 160px;
+}
+
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.88rem; font-weight: 500;
+  color: #fff;
+  padding: 0.55rem 2rem;
+}
+
+.ticker-sep { color: var(--accent); }
+
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ====== HERO ====== */
+.hero {
+  position: relative;
+  z-index: 10;
+  min-height: 92vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-name {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3px;
+  animation: floatName linear infinite;
+  opacity: 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+@keyframes floatName {
+  0%   { transform: translateY(110vh) rotate(var(--rot)); opacity: 0; }
+  5%   { opacity: var(--op); }
+  90%  { opacity: var(--op); }
+  100% { transform: translateY(-20vh) rotate(var(--rot)); opacity: 0; }
+}
+
+.hero-glass {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(26,107,46,0.2);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  max-width: 680px;
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.78rem; font-weight: 700;
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px; letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: popIn 0.6s ease both;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  animation: popIn 0.6s 0.1s ease both;
+}
+
+.hero-title .t1 { color: var(--text); }
+.hero-title .t2 {
+  color: var(--primary-light);
+  -webkit-text-stroke: 1px var(--primary);
+  text-shadow: 0 4px 20px rgba(39,168,71,0.3);
+}
+
+.hero-desc {
+  font-size: 1rem; color: var(--muted); line-height: 1.7;
+  margin-bottom: 2rem;
+  animation: popIn 0.6s 0.2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  animation: popIn 0.6s 0.3s ease both;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 10px; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; border: none; text-decoration: none;
+  transition: all 0.25s; font-family: 'Hind Siliguri', sans-serif;
+}
+
+.btn-green { background: var(--primary); color: #fff; }
+.btn-green:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(26,107,46,0.35); }
+
+.btn-accent { background: var(--accent); color: #000; }
+.btn-accent:hover { background: #d48c10; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245,166,35,0.4); }
+
+.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+.btn-red { background: var(--accent2); color: #fff; border-radius: 50px !important; }
+.btn-red:hover { background: #c0112d; transform: scale(1.05); box-shadow: 0 8px 25px rgba(232,25,60,0.4); }
+
+/* ====== FOLLOW POPUP ====== */
+.follow-popup {
+  position: fixed;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  z-index: 2000;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  padding: 1.2rem 2rem;
+  display: flex; align-items: center; gap: 1.2rem;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+}
+
+.follow-popup.show { transform: translateX(-50%) translateY(0); }
+
+.follow-popup-text { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.follow-popup-sub { font-size: 0.75rem; color: var(--muted); }
+
+.follow-popup-close {
+  position: absolute; top: 8px; right: 12px;
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; color: var(--muted);
+}
+
+/* ====== NOTIFY BANNER ====== */
+.notify-bar {
+  position: relative; z-index: 10;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  padding: 0.8rem 2rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; flex-wrap: wrap;
+}
+
+.notify-bar p { color: rgba(255,255,255,0.9); font-size: 0.88rem; }
+.notify-bar p strong { color: var(--accent); }
+
+/* ====== STATS BAR ====== */
+.stats-bar {
+  position: relative; z-index: 10;
+  display: flex; justify-content: center; flex-wrap: wrap;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.stat-item {
+  flex: 1; min-width: 130px;
+  text-align: center; padding: 1.6rem 1.5rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 3px;
+  background: var(--primary-light);
+  border-radius: 0 0 4px 4px;
+}
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.6rem; color: var(--primary);
+  letter-spacing: 2px; line-height: 1;
+}
+
+.stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 0.3rem; }
+
+/* ====== SECTION ====== */
+.section {
+  position: relative; z-index: 10;
+  padding: 4rem 2rem;
+  max-width: 1200px; margin: 0 auto;
+}
+
+.section-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+}
+
+.section-tag {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--primary-light);
+  display: flex; align-items: center; gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.section-tag::before {
+  content: ''; display: inline-block;
+  width: 22px; height: 3px;
+  background: var(--primary-light); border-radius: 2px;
+}
+
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 700; letter-spacing: 0.5px; color: var(--text);
+}
+
+.see-all {
+  color: var(--primary); font-size: 0.88rem; font-weight: 700;
+  text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
+  white-space: nowrap; transition: gap 0.2s;
+  padding: 0.4rem 1rem; background: rgba(26,107,46,0.08); border-radius: 8px;
+}
+.see-all:hover { gap: 0.6rem; background: rgba(26,107,46,0.14); }
+
+/* ====== DIVIDER ====== */
+.section-divider {
+  position: relative; z-index: 10;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent), var(--primary-light), var(--primary));
+}
+
+/* ====== NEWS GRID ====== */
+.news-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1.5rem;
+}
+
+.news-featured {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden; cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none; color: inherit; display: block;
+  box-shadow: var(--shadow);
+}
+
+.news-featured:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.news-img {
+  width: 100%; height: 220px;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #1e5c2c 50%, #0d3318 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; position: relative; overflow: hidden;
+}
+
+.news-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,64,25,0.85) 0%, transparent 60%);
+}
+
+.news-img-overlay {
+  position: absolute; bottom: 1rem; left: 1rem; z-index: 1;
+}
+
+.news-cat-pill {
+  background: var(--accent); color: #000;
+  font-size: 0.7rem; font-weight: 700;
+  padding: 0.2rem 0.7rem; border-radius: 50px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  display: inline-block;
+}
+
+.news-featured-body { padding: 1.5rem; }
+
+.news-featured-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem; font-weight: 600; line-height: 1.3;
+  margin-bottom: 0.7rem; color: var(--text);
+}
+
+.news-meta { font-size: 0.78rem; color: var(--muted); display: flex; gap: 1rem; }
+
+.news-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.news-card {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 1rem 1.2rem;
+  cursor: pointer; transition: all 0.25s;
+  display: flex; gap: 1rem; align-items: center;
+  text-decoration: none; color: inherit;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.news-card:hover {
+  border-color: var(--primary-light);
+  transform: translateX(6px);
+  box-shadow: var(--shadow);
+}
+
+.news-card-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; box-shadow: 0 4px 12px rgba(26,107,46,0.25);
+}
+
+.news-card-title { font-size: 0.92rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.25rem; }
+.news-card-date { font-size: 0.75rem; color: var(--muted); }
+
+/* ====== SPORTS GRID ====== */
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.sport-card {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 1.6rem 1rem;
+  text-align: center; cursor: pointer; transition: all 0.3s;
+  text-decoration: none; color: inherit; display: block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  position: relative; overflow: hidden;
+}
+
+.sport-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--primary-light);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.sport-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.sport-card:hover::before { transform: scaleX(1); }
+
+.sport-icon { font-size: 2.5rem; margin-bottom: 0.7rem; display: block; }
+.sport-name { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); }
+.sport-count { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ====== PLAYERS ====== */
+.players-row {
+  display: flex; gap: 1.2rem;
+  overflow-x: auto; padding-bottom: 1rem;
+  scrollbar-width: thin; scrollbar-color: var(--primary-light) transparent;
+}
+
+.player-card {
+  flex: 0 0 190px;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: 18px; padding: 1.5rem 1rem;
+  text-align: center; cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.player-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,107,46,0.05), rgba(39,168,71,0.05));
+  opacity: 0; transition: opacity 0.3s;
+}
+
+.player-card:hover {
+  border-color: var(--primary-light);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.player-card:hover::after { opacity: 1; }
+
+.player-num {
+  position: absolute; top: 10px; right: 12px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+  color: rgba(26,107,46,0.12); letter-spacing: 1px;
+}
+
+.player-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border: 3px solid rgba(26,107,46,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; margin: 0 auto 0.8rem;
+  box-shadow: 0 6px 20px rgba(26,107,46,0.25);
+}
+
+.player-name {
+  font-family: 'Oswald', sans-serif; font-size: 1rem;
+  font-weight: 600; margin-bottom: 0.15rem; color: var(--text);
+}
+
+.player-club { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem; }
+
+.player-stats { display: flex; justify-content: center; gap: 1.2rem; }
+.pstat { text-align: center; }
+.pstat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--primary); }
+.pstat-lbl { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ====== UPLOAD ====== */
+.upload-section {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 24px; padding: 3rem 2.5rem;
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
+
+.upload-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+}
+
+.upload-cols {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.upload-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.7rem; margin-bottom: 0.4rem; color: var(--text);
+}
+
+.upload-sub { color: var(--muted); margin-bottom: 1.8rem; font-size: 0.9rem; }
+
+.upload-zone {
+  border: 2px dashed rgba(26,107,46,0.3);
+  border-radius: 14px; padding: 2rem;
+  cursor: pointer; transition: all 0.3s;
+  text-align: center;
+  background: rgba(26,107,46,0.03);
+  margin-bottom: 1rem;
+}
+
+.upload-zone:hover { border-color: var(--primary); background: rgba(26,107,46,0.07); }
+.upload-zone-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+.upload-zone-text { font-size: 0.88rem; color: var(--muted); }
+.upload-zone-text strong { color: var(--primary); }
+
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; font-weight: 600; }
+
+.form-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid rgba(26,107,46,0.15);
+  border-radius: 10px; padding: 0.7rem 1rem;
+  color: var(--text); font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.92rem; outline: none; transition: border-color 0.2s;
+}
+
+.form-input:focus { border-color: var(--primary-light); background: #fff; }
+textarea.form-input { resize: vertical; min-height: 90px; }
+
+.upload-types {
+  display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem;
+}
+
+.upload-type-badge {
+  background: rgba(26,107,46,0.1);
+  border: 1px solid rgba(26,107,46,0.2);
+  color: var(--primary); font-size: 0.72rem; font-weight: 700;
+  padding: 0.25rem 0.7rem; border-radius: 50px; letter-spacing: 1px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  position: relative; z-index: 10;
+  background: var(--primary-dark);
+  padding: 3.5rem 2rem 1.5rem;
+}
+
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 2.5rem;
+}
+
+.footer-brand {}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; color: #fff;
+  letter-spacing: 2px; margin-bottom: 0.6rem;
+}
+
+.footer-logo span { color: var(--accent); }
+.footer-desc { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.2rem; }
+
+.footer-social { display: flex; gap: 0.6rem; }
+.social-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; cursor: pointer; transition: all 0.2s;
+  text-decoration: none;
+}
+.social-btn:hover { background: var(--primary-light); transform: translateY(-3px); }
+
+.footer-col h4 {
+  font-family: 'Oswald', sans-serif; font-size: 1rem; color: #fff;
+  margin-bottom: 1rem; letter-spacing: 0.5px;
+  padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  font-size: 0.85rem; transition: color 0.2s;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.footer-col ul li a:hover { color: var(--accent); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.5rem;
+  text-align: center;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.8rem;
+  max-width: 1100px; margin: 0 auto;
+}
+
+/* ====== MODAL ====== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: 22px; padding: 2.5rem;
+  max-width: 520px; width: 100%;
+  position: relative;
+  animation: modalIn 0.3s ease;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.94) translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal-close {
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  background: var(--bg); border: none; border-radius: 8px;
+  color: var(--muted); font-size: 1.1rem; cursor: pointer;
+  width: 32px; height: 32px; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: #fee; color: var(--accent2); }
+
+.modal-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem; margin-bottom: 0.4rem; color: var(--text);
+}
+
+.modal-body { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+/* ====== TOAST ====== */
+#toast {
+  display: none; position: fixed; bottom: 2rem; right: 2rem; z-index: 4000;
+  background: var(--primary); color: #fff; padding: 1rem 1.5rem;
+  border-radius: 14px; font-weight: 700; font-size: 0.95rem;
+  box-shadow: 0 8px 30px rgba(26,107,46,0.4);
+  animation: popIn 0.3s ease;
+  display: none; align-items: center; gap: 0.5rem;
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9) translateY(15px); }
+  to { opacity: 1; transform: none; }
+}
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .upload-cols { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-glass { padding: 2rem 1.2rem; }
+  .section { padding: 2.5rem 1rem; }
+  .stat-item { min-width: 90px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BG CANVAS -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🏆</div>
+    <div>
+      <div class="logo-text">Khela<span>Hub</span></div>
+      <span class="logo-sub">BD • খেলার আসল ঠিকানা</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#news">📰 সংবাদ</a></li>
+    <li><a href="#sports">⚽ খেলা</a></li>
+    <li><a href="#players">🌟 খেলোয়াড়</a></li>
+
+    <li><a href="#" class="nav-notify" onclick="openModal('notify'); return false;">🔔 নোটিফিকেশন</a></li>
+    <li><a href="#" class="nav-follow" onclick="handleFollow(this); return false;">❤️ ফলো করুন</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">🔴 LIVE</div>
+  <div class="ticker-inner" id="tick">
+    <span class="ticker-item">⚽ FIFA World Cup 2026 — USA, Canada & Mexico <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🔥 মেসি ১০ — সর্বকালের মহান গোলদাতা <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">⚡ রোনালদো ৭ — ৯০০+ ক্যারিয়ার গোল মাইলফলক <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🌟 নেইমার ১০ — ব্রাজিলের ম্যাজিক ম্যান <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🎯 ডি ব্রুইনা ১৭ — বেলজিয়ামের মিডফিল্ড কিং <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏅 এমবাপ্পে ১০ — Real Madrid-এর নতুন রাজা <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏏 বাংলাদেশ vs পাকিস্তান টেস্ট সিরিজ শুরু জুন ১৫ <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏆 UEFA Champions League Final ২০২৬ হাইলাইটস <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">⚽ FIFA World Cup 2026 — USA, Canada & Mexico <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🔥 মেসি ১০ — সর্বকালের মহান গোলদাতা <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">⚡ রোনালদো ৭ — ৯০০+ ক্যারিয়ার গোল মাইলফলক <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🌟 নেইমার ১০ — ব্রাজিলের ম্যাজিক ম্যান <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🎯 ডি ব্রুইনা ১৭ — বেলজিয়ামের মিডফিল্ড কিং <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏅 এমবাপ্পে ১০ — Real Madrid-এর নতুন রাজা <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏏 বাংলাদেশ vs পাকিস্তান টেস্ট সিরিজ শুরু জুন ১৫ <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">🏆 UEFA Champions League Final ২০২৬ হাইলাইটস <span class="ticker-sep">◆</span></span>
+  </div>
+</div>
+
+<!-- NOTIFY BAR -->
+<div class="notify-bar" id="notifyBar">
+  <p>🔔 <strong>KhelaHub BD</strong>-এর সর্বশেষ আপডেট পেতে নোটিফিকেশন চালু করুন!</p>
+  <button class="btn btn-accent" style="padding:0.4rem 1.2rem; font-size:0.82rem;" onclick="enableNotify()">✅ চালু করুন</button>
+  <button style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.2rem;" onclick="document.getElementById('notifyBar').style.display='none'">✕</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Floating player names behind -->
+  <div class="hero-bg-text" id="heroBg"></div>
+
+  <div class="hero-glass">
+    <div class="hero-badge">🇧🇩 বাংলাদেশের #১ স্পোর্টস পোর্টাল</div>
+    <h1 class="hero-title">
+      <div class="t1">KhelaHub</div>
+      <div class="t2">BD</div>
+    </h1>
+    <p class="hero-desc">ফুটবল, ক্রিকেট, টেনিস সহ বিশ্বের সকল খেলার তথ্য, ছবি, ভিডিও ও ফাইল এক জায়গায় পাচ্ছেন।</p>
+    <div class="hero-btns">
+      <a href="#news" class="btn btn-green">📰 সর্বশেষ সংবাদ</a>
+      <button class="btn btn-red" onclick="handleFollow(this)">❤️ ফলো করুন</button>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num" id="c1">0</div><div class="stat-label">খেলার ধরন</div></div>
+  <div class="stat-item"><div class="stat-num" id="c2">0</div><div class="stat-label">মোট সংবাদ</div></div>
+  <div class="stat-item"><div class="stat-num" id="c3">0</div><div class="stat-label">খেলোয়াড় প্রোফাইল</div></div>
+  <div class="stat-item"><div class="stat-num" id="c4">0</div><div class="stat-label">ফলোয়ার</div></div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- NEWS -->
+<section class="section reveal" id="news">
+  <div class="section-header">
+    <div><div class="section-tag">সর্বশেষ</div><h2 class="section-title">খেলার সংবাদ</h2></div>
+    <a href="#" class="see-all">সব দেখুন →</a>
+  </div>
+  <div class="news-grid">
+    <a href="#" class="news-featured" onclick="openModal('n1'); return false;">
+      <div class="news-img">⚽
+        <div class="news-img-overlay"><span class="news-cat-pill">⚽ ফুটবল</span></div>
+      </div>
+      <div class="news-featured-body">
+        <div class="news-featured-title">FIFA World Cup 2026: বাংলাদেশের স্বপ্ন ও বিশ্বের প্রস্তুতি</div>
+        <div class="news-meta"><span>📅 ৩১ মে ২০২৬</span><span>👁 ১২,৪৫৬ ভিউ</span><span>❤️ ৩৪৫</span></div>
+      </div>
+    </a>
+    <div class="news-list">
+      <a href="#" class="news-card" onclick="openModal('n2'); return false;">
+        <div class="news-card-icon">🏏</div>
+        <div><div class="news-card-title">বাংলাদেশ vs পাকিস্তান টেস্ট সিরিজ ২০২৬</div><div class="news-card-date">📅 ২৯ মে ২০২৬ • ক্রিকেট</div></div>
+      </a>
+      <a href="#" class="news-card" onclick="openModal('n3'); return false;">
+        <div class="news-card-icon">🎾</div>
+        <div><div class="news-card-title">ফ্রেঞ্চ ওপেন ২০২৬: কে নেবেন শিরোপা?</div><div class="news-card-date">📅 ২৮ মে ২০২৬ • টেনিস</div></div>
+      </a>
+      <a href="#" class="news-card" onclick="openModal('n4'); return false;">
+        <div class="news-card-icon">🏆</div>
+        <div><div class="news-card-title">UEFA Champions League Final ২০২৬ হাইলাইটস</div><div class="news-card-date">📅 ২৭ মে ২০২৬ • ফুটবল</div></div>
+      </a>
+      <a href="#" class="news-card" onclick="openModal('n5'); return false;">
+        <div class="news-card-icon">🏀</div>
+        <div><div class="news-card-title">NBA Finals 2026 — Golden State vs Celtics</div><div class="news-card-date">📅 ২৬ মে ২০২৬ • বাস্কেটবল</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SPORTS -->
+<section class="section reveal" id="sports" style="background: var(--bg2); max-width:100%; padding:4rem 0;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 2rem;">
+    <div class="section-header">
+      <div><div class="section-tag">বিভাগ</div><h2 class="section-title">সকল খেলাধুলা</h2></div>
+    </div>
+    <div class="sports-grid">
+      <a href="#" class="sport-card"><span class="sport-icon">⚽</span><div class="sport-name">ফুটবল</div><div class="sport-count">৩৪৫ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🏏</span><div class="sport-name">ক্রিকেট</div><div class="sport-count">২৮৯ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🏀</span><div class="sport-name">বাস্কেটবল</div><div class="sport-count">১২৩ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🎾</span><div class="sport-name">টেনিস</div><div class="sport-count">৯৮ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🏊</span><div class="sport-name">সাঁতার</div><div class="sport-count">৬৫ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🥊</span><div class="sport-name">বক্সিং</div><div class="sport-count">৭৮ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🏑</span><div class="sport-name">হকি</div><div class="sport-count">৪৫ টি পোস্ট</div></a>
+      <a href="#" class="sport-card"><span class="sport-icon">🏋️</span><div class="sport-name">কুস্তি</div><div class="sport-count">৩২ টি পোস্ট</div></a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PLAYERS -->
+<section class="section reveal" id="players">
+  <div class="section-header">
+    <div><div class="section-tag">স্পটলাইট</div><h2 class="section-title">বিশ্বের সেরা খেলোয়াড়</h2></div>
+    <a href="#" class="see-all">সব দেখুন →</a>
+  </div>
+  <div class="players-row">
+    <div class="player-card">
+      <span class="player-num">10</span>
+      <div class="player-avatar">🇦🇷</div>
+      <div class="player-name">লিওনেল মেসি</div>
+      <div class="player-club">Inter Miami • আর্জেন্টিনা</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">8</div><div class="pstat-lbl">Ballon d'Or</div></div>
+        <div class="pstat"><div class="pstat-val">800+</div><div class="pstat-lbl">গোল</div></div>
+      </div>
+    </div>
+    <div class="player-card">
+      <span class="player-num">7</span>
+      <div class="player-avatar">🇵🇹</div>
+      <div class="player-name">ক্রিস্টিয়ানো রোনালদো</div>
+      <div class="player-club">Al Nassr • পর্তুগাল</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">5</div><div class="pstat-lbl">Ballon d'Or</div></div>
+        <div class="pstat"><div class="pstat-val">900+</div><div class="pstat-lbl">গোল</div></div>
+      </div>
+    </div>
+    <div class="player-card">
+      <span class="player-num">10</span>
+      <div class="player-avatar">🇧🇷</div>
+      <div class="player-name">নেইমার জুনিয়র</div>
+      <div class="player-club">Al Hilal • ব্রাজিল</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">77</div><div class="pstat-lbl">গোল (BRA)</div></div>
+        <div class="pstat"><div class="pstat-val">400+</div><div class="pstat-lbl">গোল</div></div>
+      </div>
+    </div>
+    <div class="player-card">
+      <span class="player-num">17</span>
+      <div class="player-avatar">🇧🇪</div>
+      <div class="player-name">ডি ব্রুইনা</div>
+      <div class="player-club">Man City • বেলজিয়াম</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">100+</div><div class="pstat-lbl">অ্যাসিস্ট</div></div>
+        <div class="pstat"><div class="pstat-val">5x</div><div class="pstat-lbl">EPL Title</div></div>
+      </div>
+    </div>
+    <div class="player-card">
+      <span class="player-num">10</span>
+      <div class="player-avatar">🇫🇷</div>
+      <div class="player-name">কিলিয়ান এমবাপ্পে</div>
+      <div class="player-club">Real Madrid • ফ্রান্স</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">2018</div><div class="pstat-lbl">WC চ্যাম্পিয়ন</div></div>
+        <div class="pstat"><div class="pstat-val">300+</div><div class="pstat-lbl">গোল</div></div>
+      </div>
+    </div>
+    <div class="player-card">
+      <span class="player-num">9</span>
+      <div class="player-avatar">🇧🇩</div>
+      <div class="player-name">জামাল ভূঁইয়া</div>
+      <div class="player-club">বাংলাদেশ জাতীয় দল</div>
+      <div class="player-stats">
+        <div class="pstat"><div class="pstat-val">50+</div><div class="pstat-lbl">ক্যাপ</div></div>
+        <div class="pstat"><div class="pstat-val">৫★</div><div class="pstat-lbl">রেটিং</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Khela<span>Hub</span> BD</div>
+      <p class="footer-desc">বাংলাদেশের সেরা খেলাধুলার তথ্যভান্ডার। ফুটবল, ক্রিকেট, টেনিস সহ সকল খেলার সর্বশেষ তথ্য, ছবি ও ভিডিও পাচ্ছেন এখানে।</p>
+      <div class="footer-social">
+        <a class="social-btn" title="Facebook">📘</a>
+        <a class="social-btn" title="YouTube">📺</a>
+        <a class="social-btn" title="Twitter">🐦</a>
+        <a class="social-btn" title="Instagram">📷</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>বিভাগ</h4>
+      <ul>
+        <li><a href="#">⚽ ফুটবল</a></li>
+        <li><a href="#">🏏 ক্রিকেট</a></li>
+        <li><a href="#">🎾 টেনিস</a></li>
+        <li><a href="#">🏀 বাস্কেটবল</a></li>
+        <li><a href="#">🥊 বক্সিং</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>পেজ</h4>
+      <ul>
+        <li><a href="#">🏠 হোম</a></li>
+        <li><a href="#news">📰 সংবাদ</a></li>
+        <li><a href="#players">🌟 খেলোয়াড়</a></li>
+
+        <li><a href="#" onclick="openModal('contact')">📬 যোগাযোগ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>ফলো করুন</h4>
+      <ul>
+        <li><a href="#">👥 ৫,২৩৪ ফলোয়ার</a></li>
+        <li><a href="#">📢 নোটিফিকেশন চালু</a></li>
+        <li><a href="#">📩 নিউজলেটার</a></li>
+        <li><a href="#">📞 সাপোর্ট</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © ২০২৬ KhelaHub BD · সকল স্বত্ব সংরক্ষিত · Made with ❤️ in Bangladesh 🇧🇩
+  </div>
+</footer>
+
+<!-- FOLLOW POPUP -->
+<div class="follow-popup" id="followPopup">
+  <button class="follow-popup-close" onclick="document.getElementById('followPopup').classList.remove('show')">✕</button>
+  <div style="font-size:2rem;">🎉</div>
+  <div>
+    <div class="follow-popup-text">ধন্যবাদ! আপনি KhelaHub BD ফলো করেছেন!</div>
+    <div class="follow-popup-sub">নতুন পোস্টের নোটিফিকেশন পাবেন।</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="mOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="mContent"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✅ সফলভাবে জমা হয়েছে!</div>
+
+<script>
+// ===== FLOATING PLAYER NAMES BACKGROUND =====
+const names = [
+  { text: 'MESSI', num: '10', color: '#1a6b2e' },
+  { text: 'RONALDO', num: '7', color: '#d48c10' },
+  { text: 'NEYMAR', num: '10', color: '#1a4fa8' },
+  { text: 'DE BRUYNE', num: '17', color: '#8b1a8b' },
+  { text: 'MBAPPÉ', num: '10', color: '#a81a1a' },
+  { text: 'HAALAND', num: '9', color: '#1a6b2e' },
+  { text: 'SALAH', num: '11', color: '#c0112d' },
+  { text: 'BENZEMA', num: '9', color: '#d4a017' },
+  { text: '⚽', num: '', color: '#1a6b2e' },
+  { text: '🏆', num: '', color: '#d48c10' },
+  { text: '🏏', num: '', color: '#1a4fa8' },
+];
+
+const heroBg = document.getElementById('heroBg');
+
+function createFloatingName() {
+  const p = names[Math.floor(Math.random() * names.length)];
+  const el = document.createElement('div');
+  el.className = 'floating-name';
+  const size = Math.random() * 36 + 20;
+  const x = Math.random() * 100;
+  const rot = (Math.random() - 0.5) * 30;
+  const dur = Math.random() * 10 + 12;
+  const delay = Math.random() * 5;
+  const op = Math.random() * 0.18 + 0.06;
+  const showNum = Math.random() > 0.4;
+  el.textContent = (showNum && p.num) ? p.num : p.text;
+  el.style.cssText = `
+    left:${x}%;
+    font-size:${size}px;
+    color:${p.color};
+    --rot:${rot}deg;
+    --op:${op};
+    animation-duration:${dur}s;
+    animation-delay:${delay}s;
+  `;
+  heroBg.appendChild(el);
+  setTimeout(() => el.remove(), (dur + delay) * 1000 + 500);
+}
+
+setInterval(createFloatingName, 600);
+for (let i = 0; i < 18; i++) createFloatingName();
+
+// ===== CANVAS BG =====
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+let particles2 = [];
+function initP2() {
+  particles2 = [];
+  for (let i = 0; i < 80; i++) {
+    particles2.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 1,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      op: Math.random() * 0.12 + 0.04,
+    });
+  }
+}
+
+function drawBg() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // soft light bg gradient
+  const g = ctx.createRadialGradient(canvas.width*0.3, canvas.height*0.2, 0, canvas.width*0.3, canvas.height*0.2, canvas.width*0.7);
+  g.addColorStop(0, 'rgba(200,235,210,0.6)');
+  g.addColorStop(1, 'rgba(225,238,228,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const g2 = ctx.createRadialGradient(canvas.width*0.8, canvas.height*0.8, 0, canvas.width*0.8, canvas.height*0.8, canvas.width*0.5);
+  g2.addColorStop(0, 'rgba(245,166,35,0.12)');
+  g2.addColorStop(1, 'rgba(245,166,35,0)');
+  ctx.fillStyle = g2;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  particles2.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(26,107,46,${p.op})`;
+    ctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+  });
+
+  requestAnimationFrame(drawBg);
+}
+
+resize(); initP2(); drawBg();
+window.addEventListener('resize', () => { resize(); initP2(); });
+
+// ===== COUNTERS =====
+function animCount(el, target, suffix='') {
+  let cur = 0;
+  const step = Math.ceil(target / 60);
+  const t = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur + suffix;
+    if (cur >= target) clearInterval(t);
+  }, 18);
+}
+setTimeout(() => {
+  animCount(document.getElementById('c1'), 12);
+  animCount(document.getElementById('c2'), 1248);
+  animCount(document.getElementById('c3'), 86);
+  animCount(document.getElementById('c4'), 5234);
+}, 400);
+
+// ===== REVEAL =====
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ===== FOLLOW =====
+let followed = false;
+function handleFollow(btn) {
+  if (followed) return;
+  followed = true;
+  if (btn && btn.tagName === 'A') btn.textContent = '✅ ফলো হয়েছে';
+  document.querySelectorAll('[onclick*="handleFollow"]').forEach(b => {
+    if (b.tagName === 'BUTTON') b.textContent = '✅ ফলো হয়েছে';
+    if (b.tagName === 'A') b.textContent = '✅ ফলো হয়েছে';
+  });
+  const fp = document.getElementById('followPopup');
+  fp.classList.add('show');
+  document.getElementById('c4').textContent = '5235';
+  setTimeout(() => fp.classList.remove('show'), 5000);
+}
+
+// ===== NOTIFY =====
+function enableNotify() {
+  if ('Notification' in window && Notification.permission !== 'granted') {
+    Notification.requestPermission();
+  }
+  document.getElementById('notifyBar').style.background = '#27a847';
+  document.getElementById('notifyBar').querySelector('p').innerHTML = '✅ নোটিফিকেশন <strong>চালু হয়েছে</strong>! ধন্যবাদ।';
+  setTimeout(() => { document.getElementById('notifyBar').style.display='none'; }, 3000);
+}
+
+// ===== MODAL DATA =====
+const modals = {
+  n1: { t: '⚽ FIFA World Cup 2026', b: 'FIFA World Cup 2026 যুক্তরাষ্ট্র, কানাডা ও মেক্সিকোতে অনুষ্ঠিত হবে। ৪৮টি দলের অংশগ্রহণে এটি হবে ইতিহাসের বৃহত্তম বিশ্বকাপ।<br><br>📅 তারিখ: জুন-জুলাই ২০২৬<br>🌍 স্থান: ১৬টি শহর, ৩টি দেশ<br>⚽ দল: ৪৮টি জাতীয় দল' },
+  n2: { t: '🏏 বাংলাদেশ vs পাকিস্তান টেস্ট', b: 'বাংলাদেশ vs পাকিস্তান টেস্ট সিরিজ ২০২৬ শুরু হবে জুন ১৫ তারিখে। ঢাকায় ২টি এবং চট্টগ্রামে ১টি টেস্ট অনুষ্ঠিত হবে।<br><br>📅 শুরু: জুন ১৫, ২০২৬<br>🏟️ মিরপুর শেরে বাংলা স্টেডিয়াম' },
+  n3: { t: '🎾 ফ্রেঞ্চ ওপেন ২০২৬', b: 'Roland Garros ২০২৬-এ কার্লোস আলকারাজ ও জ্যানিক সিনার আবারো মুখোমুখি হতে পারেন। এই মৌসুমে উত্তেজনাপূর্ণ ম্যাচের প্রত্যাশা।<br><br>📅 মে ২৫ – জুন ৮, ২০২৬' },
+  n4: { t: '🏆 UEFA Champions League Final', b: 'UEFA Champions League Final ২০২৬ — Real Madrid vs Man City। অতিরিক্ত সময়ে নির্ধারিত উত্তেজনাপূর্ণ ম্যাচ হয়েছে।<br><br>📅 মে ২৭, ২০২৬' },
+  n5: { t: '🏀 NBA Finals 2026', b: 'NBA Finals 2026 — Golden State Warriors vs Boston Celtics। সিরিজটি ৩-২ গেমে গড়িয়েছে। আজ রাতে গেম ৬।<br><br>📅 মে ২৬-৩১, ২০২৬' },
+  notify: { t: '🔔 নোটিফিকেশন চালু করুন', b: 'KhelaHub BD-এর সর্বশেষ সংবাদ ও আপডেট সবার আগে পেতে নোটিফিকেশন চালু করুন।', extra: `<button class="btn btn-green" style="width:100%;justify-content:center;" onclick="enableNotify();closeModal()">✅ নোটিফিকেশন চালু করুন</button>` },
+  contact: {
+    t: '📬 যোগাযোগ করুন', b: '',
+    extra: `
+      <div class="form-group"><label class="form-label">আপনার নাম</label><input class="form-input" placeholder="মোঃ রাহিম"/></div>
+      <div class="form-group"><label class="form-label">ইমেইল / ফোন</label><input class="form-input" placeholder="email@mail.com"/></div>
+      <div class="form-group"><label class="form-label">বার্তা</label><textarea class="form-input" placeholder="বার্তা লিখুন..."></textarea></div>
+      <button class="btn btn-green" style="width:100%;justify-content:center;" onclick="showToast();closeModal()">✉️ পাঠান</button>`
+  }
+};
+
+function openModal(k) {
+  const m = modals[k]; if (!m) return;
+  document.getElementById('mContent').innerHTML =
+    `<h2 class="modal-title">${m.t}</h2>${m.b ? `<div class="modal-body">${m.b}</div>` : ''}${m.extra || '<button class="btn btn-outline" style="margin-top:0.5rem" onclick="closeModal()">বন্ধ করুন</button>'}`;
+  document.getElementById('mOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('mOverlay').classList.remove('open'); }
+
+// ===== UPLOAD =====
+function handleFiles(inp) {
+  const list = document.getElementById('file-list');
+  list.innerHTML = '';
+  Array.from(inp.files).forEach(f => {
+    const d = document.createElement('div');
+    d.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.5rem 1rem;margin-bottom:0.4rem;display:flex;justify-content:space-between;font-size:0.85rem;';
+    d.innerHTML = `<span>📄 ${f.name}</span><span style="color:var(--muted)">${(f.size/1024).toFixed(1)} KB</span>`;
+    list.appendChild(d);
+  });
+}
+
+function doUpload() {
+  const link = document.getElementById('linkIn').value;
+  const title = document.getElementById('titleIn').value;
+  const desc = document.getElementById('descIn').value;
+  const files = document.getElementById('fi').files;
+  if (!link && !title && !desc && files.length === 0) {
+    alert('অনুগ্রহ করে কমপক্ষে একটি তথ্য দিন।'); return;
+  }
+  showToast();
+  document.getElementById('file-list').innerHTML = '';
+  document.getElementById('linkIn').value = '';
+  document.getElementById('titleIn').value = '';
+  document.getElementById('descIn').value = '';
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.style.display = 'flex';
+  setTimeout(() => { t.style.display = 'none'; }, 3500);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// Show follow popup after 8s for new visitors
+setTimeout(() => {
+  if (!followed) {
+    const p = document.getElementById('followPopup');
+    p.querySelector('.follow-popup-text').textContent = 'KhelaHub BD ফলো করতে চান?';
+    p.querySelector('.follow-popup-sub').textContent = 'সর্বশেষ খেলার আপডেট পান!';
+    p.innerHTML += `<button class="btn btn-red" style="padding:0.5rem 1.2rem;font-size:0.85rem;" onclick="handleFollow(this);document.getElementById('followPopup').classList.remove('show')">❤️ ফলো</button>`;
+    p.classList.add('show');
+    setTimeout(() => p.classList.remove('show'), 8000);
+  }
+}, 8000);
+</script>
+</body>
+</html>
